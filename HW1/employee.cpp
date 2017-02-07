@@ -10,6 +10,9 @@ class Employee
 {
 	public:
 		Employee(void); //constructor, sets both variables to zero.
+		Employee(int id, double Salary); //constructor. allows the user to create a employee objecte with both ID and SALARY
+		Employee(int id); //constructor, allows you to create a employee objecte with only an ID;
+		Employee(double salary); //constructor, allows you to create a employee object with only a salary;
 		void setSalary(float newSalary); // sets the value of SALARY
 		void setID(int newID); // sets the value of SALARY
 		float getSalary(void); //returns the value of SALARY
@@ -25,6 +28,19 @@ Employee::Employee(void) //constructor, sets both variables to zero.
 {
 	ID=0;
 	SALARY=0;
+}
+Employee::Employee(int id, double salary)
+{
+	ID=id;
+	SALARY=salary;
+}
+Employee::Employee(int id)
+{
+	ID=id;
+}
+Employee::Employee(double salary)
+{
+	Salary=salary;
 }
 float Employee::getSalary(void) {return SALARY;} //returns the value of SALARY
 int Employee::getID(void) {return ID;} //returns the value of ID 
