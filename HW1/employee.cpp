@@ -9,50 +9,55 @@ using namespace std;
 class Employee
 {
 	public:
-		Employee(void); //constructor, sets both variables to zero.
-		Employee(int id, double Salary); //constructor. allows the user to create a employee objecte with both ID and SALARY
-		Employee(int id); //constructor, allows you to create a employee objecte with only an ID;
-		Employee(double salary); //constructor, allows you to create a employee object with only a salary;
+		Employee(void); //default constructor, sets both variables to zero.
+		Employee(int id, float Salary); //constructor. allows the user to create a employee objecte with both ID and SALARY
 		void setSalary(float newSalary); // sets the value of SALARY
-		void setID(int newID); // sets the value of SALARY
+		void setID(int newID); // sets the value of ID
 		float getSalary(void); //returns the value of SALARY
 		int getID(void); //returns the value of ID 
 
 		
 	private:
-	double SALARY;
+	float SALARY;
 	int ID;
 };
+
+
+
+int main()
+{
+Employee staffOne;
+int staffID;
+float staffSal;
+
+std::cout << "Enter the ID Number and Salary of employee one." << endl;
+std::cin >> staffID >> staffSal;
+staffOne.setID(staffID);
+staffOne.setSalary(staffSal);
+std::cout << "The ID of employee one is: " << staffOne.getID() << " and the salary is: " << staffOne.getSalary() << endl;
+std::cout << "Enter the ID Number and Salary of employee two." << endl;
+std::cin >> staffID >> staffSal;
+//fix this later
+EMployee staffTwo(staffID, staffSal);
+std::cout << "The ID of employee two is: " << staffTwo.getID() << " and the salary is: " << staffTwo.getSalary() << endl;
+	
+
+	return 0;
+}
+
+
 
 Employee::Employee(void) //constructor, sets both variables to zero.
 {
 	ID=0;
 	SALARY=0;
 }
-Employee::Employee(int id, double salary)
+Employee::Employee(int id, float salary)
 {
 	ID=id;
 	SALARY=salary;
-}
-Employee::Employee(int id)
-{
-	ID=id;
-}
-Employee::Employee(double salary)
-{
-	Salary=salary;
 }
 float Employee::getSalary(void) {return SALARY;} //returns the value of SALARY
 int Employee::getID(void) {return ID;} //returns the value of ID 
 void Employee::setSalary(float newSalary) { SALARY=newSalary; } // sets the value of SALARY
 void Employee::setID(int newID) {ID=newID;} // sets the value of SALARY
-
-int main()
-{
-
-	
-	
-	
-
-	return 0;
-}
