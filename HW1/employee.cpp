@@ -15,30 +15,30 @@ class Employee
 		int getID(void); //returns the value of ID 
 		
 	private:
-	float SALARY;
-	int ID;
+		float SALARY;
+		int ID;
 };
 
 
 int main()
 {
-Employee staffOne;
-int staffID;
-float staffSal;
+	Employee staffOne;
+	int staffID;
+	float staffSal;
 
-std::cout << "Enter the ID Number and Salary of the employee." << endl;
-std::cin >> staffID >> staffSal;
-staffOne.setID(staffID);
-staffOne.setSalary(staffSal);
+	std::cout << "Enter the ID Number and Salary of the employee." << endl;
+	std::cin >> staffID >> staffSal;
+	staffOne.setID(staffID);
+	staffOne.setSalary(staffSal);
 
-//That satisfies the Assignment. I wasen't sure how strictly you wanted to us to follow the instructions given. So I wrote the statments commented out below showing that the program works as intended and that the other constructor I wrote works as well.
-/*
-std::cout << "The ID of the employee is: " << staffOne.getID() << " and the salary is: " << staffOne.getSalary() << endl;
-std::cout << "Enter the ID Number and Salary of the employee." << endl;
-std::cin >> staffID >> staffSal;
-Employee staffTwo(staffID, staffSal);
-std::cout << "The ID of the employee is: " << staffTwo.getID() << " and the salary is: " << staffTwo.getSalary() << endl;
-*/	
+	//That satisfies the Assignment. I wasen't sure how strictly you wanted to us to follow the instructions given. So I wrote the statments commented out below showing that the program works as intended and that the other constructor I wrote works as well.
+	/*
+	std::cout << "The ID of the employee is: " << staffOne.getID() << " and the salary is: " << staffOne.getSalary() << endl;
+	std::cout << "Enter the ID Number and Salary of the employee." << endl;
+	std::cin >> staffID >> staffSal;
+	Employee staffTwo(staffID, staffSal);
+	std::cout << "The ID of the employee is: " << staffTwo.getID() << " and the salary is: " << staffTwo.getSalary() << endl;
+	*/	
 
 	return 0;
 }
