@@ -1,39 +1,39 @@
 Notes for the exam
 
-when accessing the functions thorugh a pointer you need to use an arrow -> ratther than a dot.
+when accessing the functions through a pointer you need to use an arrow -> rather than a dot.
 
-to derive a class just add a : after the class name and add public(or private if desired) and the dereived class name.
+to derive a class just add a : after the class name and add public(or private if desired) and the deceived class name.
 
-you dont need to put a ; after the brackets of a class function defenition, but you can.
+you don’t need to put a ; after the brackets of a class function definition, but you can.
 
-derefrenceing a pointer by adding * in fornt of it an assigning it a vallue will change the vallue of the objuct it's pointing to.
-simillarly derefrenceing the pointer will give you the data inside the pointed object, wile leaving the pointer as it is will just give you the address value of the object you are pointing to.
+de-referencing a pointer by adding * in front of it an assigning it a value will change the value of the object it's pointing to.
+similarly de-referencing the pointer will give you the data inside the pointed object, while leaving the pointer as it is will just give you the address value of the object you are pointing to.
 
-to generate a random number(if needed) #include ctime and cstdlib. srand(time(0)); will result in a completly random number
-rand()%15+1 will generate a random number betweet 1 and 15. rand()%15 would generate a random number between 0-14. srand(time(0)) is olny called once to seed the random number. rand() is called all times after.
+to generate a random number(if needed) #include ctime and cstdlib. srand(time(0)); will result in a completely random number
+rand()%15+1 will generate a random number between 1 and 15. rand()%15 would generate a random number between 0-14. srand(time(0)) is only called once to seed the random number. rand() is called all times after.
 
-a const pointer will treat the variable as a const when accessed through a pointer. will not change the the ablioty to reassign the pointer to another variable, just reasigning the variable THROUGH the pointer
+a const pointer will treat the variable as a const when accessed through a pointer. will not change the the ability to reassign the pointer to another variable, just resigning the variable THROUGH the pointer
 
-however a *const pointer can not change what the pointer points to. once that pointer is declared it will never point to anything else. the * is only declared before const, not the actually pointer.
+however a *const pointer can not change what the pointer points to. once that pointer is declared it will never point to anything else. the * is only declared before const, not the actually pointer. a *const pointer can still be de-referenced to change the value of what it is pointing to.
 
-call by refrence. if & is used before the variable in a function definition ( void something( int & x);) it will call the variable by refrence, meaning any changes that happen to the variable inside the function will also happen to it outside the function. it works like what happens when you derefrence a pointer.
+call by reference. if & is used before the variable in a function definition ( void something( int & x);) it will call the variable by reference, meaning any changes that happen to the variable inside the function will also happen to it outside the function. it works like what happens when you deference a pointer.
 
-pointer increment: using ++ or -- before a pointer ( as in ++Iprt) will increment the pointer by 1 type of whatever its pointing to. example. if Iptr is of type int ++Iptr will move it foward in memory by 8 bits because and int is 8 bits long. good incrementing things when you know what you size constrains are. when assigning the pointer to something that needs to be incremented, you need to specify where in the array, vector etc you want it to start. 0 is the best bet.
+pointer increment: using ++ or -- before a pointer ( as in ++Iprt) will increment the pointer by 1 type of whatever its pointing to. example. if Iptr is of type int ++Iptr will move it forward in memory by 8 bits because and int is 8 bits long. good incrementing things when you know what you size constrains are. when assigning the pointer to something that needs to be incremented, you need to specify where in the array, vector etc you want it to start. 0 is the best bet.
 
 pointers to pointers: you can have pointers that point to pointers that point to objects, but when declaring these pointers you need to add an * for each level of pointer. ex. int ***ptr3, **ptr2, *prt1, x=7; ptr1 = &x; ptr2=&ptr1; ptr3=&ptr2;
 
-you can pass a pointer by refrence to a function, but in order to access it's value you must derefrence it before each call of it.
+you can pass a pointer by reference to a function, but in order to access it's value you must deference it before each call of it.
 
-passing by *const pointer will allw you to change the value without changeing what the pointer points to.
+passing by *const pointer will allow you to change the value without changing what the pointer points to.
 
-in order to declare a pointer to a defigned function, you declare it the way you would declare a function, but the pointer name must be inside paranthases when called, and but be next to the paramater types that that paramater accepts, and it must = the function name with a & infront.
+in order to declare a pointer to a defined function, you declare it the way you would declare a function, but the pointer name must be inside parentheses when called, and but be next to the parameter types that that parameter accepts, and it must = the function name with a & in front.
 ex: void doStuff(int x); void (*ptr1)(int)=&dostuff;
 
-A friend function is defigned in a class the same way you define a regular function, except friend is specified before the return type. It is not considered a member of the class, ait can be called by a derived class. to invoke a freind function rather than the standard function call classObj.something() you put the class object inside the function. ex frinedName(classObj); It does not matter wether you put this in private or public as it is not technivcaly part of either.f reind functions have to be passed information in the function definition. interestingly, it seams that you can not declare the friend function with the scope resolution operator, as it is not necnically part of the class.
-***pratice this
+A friend function is defined in a class the same way you define a regular function, except friend is specified before the return type. It is not considered a member of the class, it can be called by a derived class. to invoke a friend function rather than the standard function call like classObj.something() you put the class object inside the function. ex frinedName(classObj); It does not matter whether you put this in private or public as it is not technically part of either. freind functions have to be passed information in the function definition. interestingly, it seams that you can not declare the friend function with the scope resolution operator, as it is not technically part of the class.
+***practice this
 
 
-operator overloading. in order to overload an operator for a member function you defign the function as such. return type(often the class type if you want to return an anstance of that class0 the word operator, then they symbol you wannt to overload. then in parantheses you put either const objectype right, or const objectType& right, const objectType left. then continue with the function definition. scratch that. you might not need right and left. that might have just been from the example i was reading.
-******thy this out yourself. i have a feeling you are going to need to pratice this one*****.
-//operator overloading may not be on this one. he might mean functuon overloiading. going to study it anyway.
+operator overloading. in order to overload an operator for a member function you define the function as such. return type(often the class type if you want to return an an instance of that class) the word operator, then they symbol you want to overload. then in parentheses you put either const object type right, or const objectType& right, const objectType left( don’t do this not sure how). then continue with the function definition. scratch that. you might not need right and left. that might have just been from the example i was reading. when you overload an operator us access function/variables of the left operator with this -> function(). you use the right object with the name given in the  function definition.
+******try this out yourself. i have a feeling you are going to need to practice this one*****.
+//operator overloading may not be on this one. he might mean function overloading. going to study it anyway.
 
