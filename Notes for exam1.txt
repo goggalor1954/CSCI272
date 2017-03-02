@@ -10,15 +10,15 @@ derefrenceing a pointer by adding * in fornt of it an assigning it a vallue will
 simillarly derefrenceing the pointer will give you the data inside the pointed object, wile leaving the pointer as it is will just give you the address value of the object you are pointing to.
 
 to generate a random number(if needed) #include ctime and cstdlib. srand(time(0)); will result in a completly random number
-rand()%15+1 will generate a random number betweet 1 and 15. rand()%15 would generate a random number between 0-14.
+rand()%15+1 will generate a random number betweet 1 and 15. rand()%15 would generate a random number between 0-14. srand(time(0)) is olny called once to seed the random number. rand() is called all times after.
 
 a const pointer will treat the variable as a const when accessed through a pointer. will not change the the ablioty to reassign the pointer to another variable, just reasigning the variable THROUGH the pointer
 
-however a *const pointer can not change what the pointer points to. once that pointer is declared it will never point to anything else.
+however a *const pointer can not change what the pointer points to. once that pointer is declared it will never point to anything else. the * is only declared before const, not the actually pointer.
 
 call by refrence. if & is used before the variable in a function definition ( void something( int & x);) it will call the variable by refrence, meaning any changes that happen to the variable inside the function will also happen to it outside the function. it works like what happens when you derefrence a pointer.
 
-pointer increment: using ++ or -- before a pointer ( as in ++Iprt) will increment the pointer by 1 type of whatever its pointing to. example. if Iptr is of type int ++Iptr will move it foward in memory by 8 bits because and int is 8 bits long. good incrementing things when you know what you size constrains are.
+pointer increment: using ++ or -- before a pointer ( as in ++Iprt) will increment the pointer by 1 type of whatever its pointing to. example. if Iptr is of type int ++Iptr will move it foward in memory by 8 bits because and int is 8 bits long. good incrementing things when you know what you size constrains are. when assigning the pointer to something that needs to be incremented, you need to specify where in the array, vector etc you want it to start. 0 is the best bet.
 
 pointers to pointers: you can have pointers that point to pointers that point to objects, but when declaring these pointers you need to add an * for each level of pointer. ex. int ***ptr3, **ptr2, *prt1, x=7; ptr1 = &x; ptr2=&ptr1; ptr3=&ptr2;
 
@@ -29,7 +29,7 @@ passing by *const pointer will allw you to change the value without changeing wh
 in order to declare a pointer to a defigned function, you declare it the way you would declare a function, but the pointer name must be inside paranthases when called, and but be next to the paramater types that that paramater accepts, and it must = the function name with a & infront.
 ex: void doStuff(int x); void (*ptr1)(int)=&dostuff;
 
-A friend function is defigned in a class the same way you define a regular function, except friend is specified before the return type. It is not considered a member of the class, and i don't think it can be called by a dreived class. to invoke a freind function rather than the standard function call classObj.something() you put the class object inside the function. ex frinedName(classObj);
+A friend function is defigned in a class the same way you define a regular function, except friend is specified before the return type. It is not considered a member of the class, ait can be called by a derived class. to invoke a freind function rather than the standard function call classObj.something() you put the class object inside the function. ex frinedName(classObj); It does not matter wether you put this in private or public as it is not technivcaly part of either.f reind functions have to be passed information in the function definition. interestingly, it seams that you can not declare the friend function with the scope resolution operator, as it is not necnically part of the class.
 ***pratice this
 
 
