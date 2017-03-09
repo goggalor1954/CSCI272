@@ -36,13 +36,14 @@ class employee
 		void printRecord(void); //prints the current primary record
 		void printRecord(int num);
 		void printRecordHead(void); //prints the top of the record collums
-		//void printAllRecords(void); //set this up once i can print specific values
+		void printAllRecords(void); 
 		string getFirstName(int num);
 		string getLastName(int num);
 		int getHireMonth(int num);
 		int getHireDay(int num);
 		int getHireYear(int num);
 		float getSalary(int num);
+		
 		//void setDateChanged( string date);
 		//string getDateChanged(void);
 		
@@ -146,8 +147,18 @@ void employee::printRecordHead(void)
 	std::cout << std::setw(2) << "";
 	std::cout <<std::setw(10) <<"Hire Date:" <<endl;
 }
+void employee::printAllRecords(void)
+{
+	if (this->getHireYear()==0) return;
+	this->printRecordHead();
+	for(int i=0; i<5; i++)
+	{
+		this->printRecord(i);
+		if (this->getHireYear(i+1)==0) i=5;
+	}
+	std::cout << "testing" << endl;
+}
 
-	
 
 
 
@@ -162,11 +173,17 @@ int main()
 	guy1.setLastName(lName);
 	guy1.setHireDate(10, 16, 1988);
 	guy1.setSalary(sal);	
-	guy1.printRecordHead();
-	guy1.printRecord();
+	guy1.setFirstName("Frank");
+	guy1.setLastName("Dee");
+	guy1.setHireDate(12, 14, 1978);
+	guy1.setSalary(78.02);
+	//guy1.printRecordHead();
+	//guy1.printRecord();
+	//guy1.printRecord(1);
+	//guy1.printAllRecords();
+	
 	
 	return 0;
 }
 
-
-//next work out print all records
+//what happend to my records
