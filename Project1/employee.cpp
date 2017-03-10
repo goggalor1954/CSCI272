@@ -1,17 +1,7 @@
 //James Roesemann
 //Project1
 
-//program that holds an employee record. using an array and pointers. (if it can be anonymous even better)
-//2 or 3 classes. one for displaying a record. one for the employee redords. one for supervisor record derived from employee
-//record has room for 5 saleries. 5 names. and five hire dates(possible with adational information for when this information was changed)
-//the ablity to print out one, some, or all records
-//best way to do this woul be to create 1 sub function , and then several functions to access that function maybe
-//make it unoform. 2 characters. 3 rows. spaced by 4
-//must be able to mive/delete records as the are entered
-//supervisor inhereded class (find something to fill in that)
-//maybe use a 2d array for name
-//array should update recursivly. create an object data structure for just the array
-//figure out a way to put restrains on number sizw maby for dates
+
 
 #include <iostream>
 #include <cstdlib>
@@ -22,68 +12,67 @@ using namespace std;
 class employee
 {
 	public:
-		employee(void);
-		void setFirstName(string name);
-		string getFirstName(void);
-		void setLastName(string name);
-		string getLastName(void);
-		void setHireDate(int month, int day, int year);
-		int getHireMonth(void);
-		int getHireDay(void);
-		int getHireYear(void);
-		void setSalary(float sal);
-		float getSalary(void);
+		employee(void); //default constructor
+		employee(string lastN, string firstN, float sal, int month, int day, int year); //sets an entire record at once when values are entered apropriatly.
+		void setFirstName(string name); // sets firstName
+		void setLastName(string name); //sets lastName
+		void setHireDate(int month, int day, int year); //sets hireDate
+		void setSalary(float sal); //sets Salary
+		void setRecord(string lastN, string firstN, float sal, int month, int day, int year); //sets an entire record when values are enterd apropriatly.
+		float getSalary(void); //returns Salary
+		string getFirstName(void); //returns firstName
+		string getLastName(void);  //returns lastName
+		string getFirstName(int num); // returns firstName from the record number given
+		string getLastName(int num);//returns lastName from the record number given
+		int getHireMonth(int num); //returns hireMonth from therecord number given
+		int getHireDay(int num); //returns hireDay from the record number given
+		int getHireYear(int num); //returns hireYear from the number given
+		float getSalary(int num); //returns salary from the record number given
+		int getHireMonth(void); //returns hireMonth
+		int getHireDay(void); //returns hireDay
+		int getHireYear(void); //returns hireYear
 		void printRecord(void); //prints the current primary record
-		void printRecord(int num);
+		void printRecord(int num); //prints out the record number stated
 		void printRecordHead(void); //prints the top of the record collums
-		void printAllRecords(void); 
-		string getFirstName(int num);
-		string getLastName(int num);
-		int getHireMonth(int num);
-		int getHireDay(int num);
-		int getHireYear(int num);
-		float getSalary(int num);
+		void printAllRecords(void); //prints all records and the header
+
 		
 		//void setDateChanged( string date);
 		//string getDateChanged(void);
 		
 		
 	private:
-		string firstLastName[5][2]; //5 arrays of 2 strings/ first collum is first name. 2nd collum is last name
+		string firstLastName[5][2]; //5 arrays of 2 collums. collum 0 is first name. collum 1 is last name
 		int hireDate[5][3]; //5 rows, 3 collums. collum 0 has month. 1 had day, 2 has year
 		float salary[5];
-		//int hireMonth[5];
-		//int hireDay[5];
-		//int hireYear[5];
 		//string dateChanged[5];
 };
 
 employee::employee(void) {} //default constructor
+employee::employee(string lastN, string firstN, float sal, int month, int day, int year)
+{
+	firstLastName[0][0]=firstN;
+	firstLastName[0][1]=lastN;
+	salary[0]=sal;
+	hireDate[0][0]=month;
+	hireDate[0][1]=day;
+	hireDate[0][2]=year;
+}
+
+
 void employee::setFirstName(string name) //adds first name to the begining of the array while incrementing the other values.
 {
-	for(int i=4; i==0; i--) firstLastName[i][0]=firstLastName[i-1][0];
+	for(int i=4; i>0; i--) firstLastName[i][0]=firstLastName[i-1][0];
 	firstLastName[0][0]=name;
 }
-string employee::getFirstName(int num)
-{
-	if(num<0||num>4) exit(0);
-	return firstLastName[num][0];
-}
-string employee::getFirstName(void) {return firstLastName[0][0];}//returns fist name in the first array
 void employee::setLastName(string name) //adds last name to the begining of the array while incrementing the other values.
 {
-	for(int i=4; i==0; i--) firstLastName[i][1]=firstLastName[i-1][1];
+	for(int i=4; i>0; i--) firstLastName[i][1]=firstLastName[i-1][1];
 	firstLastName[0][1]=name;
 }
-string employee::getLastName(void) {return firstLastName[0][1];} //returns the last name in the first array.
-string employee::getLastName(int num)
-{
-	if(num<0||num>4) exit(0);
-	return firstLastName[num][1];
-}		
 void employee::setHireDate(int month, int day, int year)
 {
-	for(int i=4; i==0; i--)
+	for(int i=4; i>0; i--)
 	{
 		hireDate[i][2]=hireDate[i-1][2];
 		hireDate[i][1]=hireDate[i-1][1];
@@ -93,6 +82,31 @@ void employee::setHireDate(int month, int day, int year)
 	hireDate[0][1]=day;
 	hireDate[0][0]=month;
 }
+void employee::setSalary(float sal)
+{
+	for (int i=4; i>0; i--) salary[i]=salary[i-1];
+	salary[0]=sal;
+}
+void employee::setRecord(string lastN, string firstN, float sal, int month, int day, int year)
+{
+	this->setLastName(lastN);
+	this->setFirstName(firstN);
+	this->setSalary(sal);
+	this->setHireDate(month,  day,  year);
+}
+
+string employee::getFirstName(int num)
+{
+	if(num<0||num>4) exit(0);
+	return firstLastName[num][0];
+}
+string employee::getFirstName(void) {return firstLastName[0][0];}//returns fist name in the first array
+string employee::getLastName(void) {return firstLastName[0][1];} //returns the last name in the first array.
+string employee::getLastName(int num)
+{
+	if(num<0||num>4) exit(0);
+	return firstLastName[num][1];
+}		
 int employee::getHireDay(void) {return hireDate[0][1];}
 int employee::getHireDay(int num)
 {
@@ -110,11 +124,6 @@ int employee::getHireYear(int num)
 {
 	if(num<0||num>4) exit(0);
 	return hireDate[num][2];
-}
-void employee::setSalary(float sal)
-{
-	for (int i=4; i==0; i--) salary[i]=salary[i-1];
-	salary[0]=sal;
 }
 float employee::getSalary(void) {return salary[0];}
 float employee::getSalary(int num)
@@ -137,7 +146,6 @@ void employee::printRecord(int num)
 	std::cout << std::setw(1) << ""; 
 	std::cout <<std::setw(4)<<this->getHireYear(num)<<endl;
 }
-
 void employee::printRecordHead(void) 
 {
 	std::cout << left <<std::setw(15)<<"Last Name:";
@@ -156,7 +164,6 @@ void employee::printAllRecords(void)
 		this->printRecord(i);
 		if (this->getHireYear(i+1)==0) i=5;
 	}
-	std::cout << "testing" << endl;
 }
 
 
@@ -164,26 +171,29 @@ void employee::printAllRecords(void)
 
 int main()
 {
-	employee guy1;
+	//employee guy1;
+	employee staff("Mackland", "Bert", 3.50, 8,5,2014);
 	string fName="james", lName="roesemann";
 	float sal=17.76;
 	
-
-	guy1.setFirstName(fName);
-	guy1.setLastName(lName);
-	guy1.setHireDate(10, 16, 1988);
-	guy1.setSalary(sal);	
-	guy1.setFirstName("Frank");
-	guy1.setLastName("Dee");
-	guy1.setHireDate(12, 14, 1978);
-	guy1.setSalary(78.02);
-	//guy1.printRecordHead();
-	//guy1.printRecord();
-	//guy1.printRecord(1);
-	//guy1.printAllRecords();
 	
+	staff.setFirstName(fName);
+	staff.setLastName(lName);
+	staff.setHireDate(10, 16, 1988);
+	staff.setSalary(sal);	
+	staff.setFirstName("Frank");
+	staff.setLastName("Dee");
+	staff.setHireDate(12, 14, 1978);
+	staff.setSalary(78.02);
+	staff.setFirstName("Zap");
+	staff.setLastName("Branagan");
+	staff.setHireDate(4, 17, 3000);
+	staff.setSalary(78.34);
+	staff.setRecord("Segar", "Bob", 12.78, 9, 18, 1963);
+	
+	staff.printAllRecords();
 	
 	return 0;
 }
 
-//what happend to my records
+//next test what hapend when you get more than 5.
