@@ -133,6 +133,7 @@ float employee::getSalary(int num)
 }
 void employee::printRecord(void) {this->printRecord(0);} 
 void employee::printRecord(int num) 
+
 { 
 	std::cout<< std::left << std::setw(15) << this->getLastName(num);
 	std::cout << std::setw(2) << "";
@@ -141,9 +142,9 @@ void employee::printRecord(int num)
 
 	std::cout<<std::setw(7)<<this->getSalary(num);
 	std::cout << std::setw(2) <<this->getHireMonth(num);
-	std::cout << std::setw(1) << ""; 
+	std::cout << std::setw(1) << "/"; 
 	std::cout << std::setw(2) <<this->getHireDay(num);
-	std::cout << std::setw(1) << ""; 
+	std::cout << std::setw(1) << "/"; 
 	std::cout <<std::setw(4)<<this->getHireYear(num)<<endl;
 }
 void employee::printRecordHead(void) 
@@ -157,13 +158,16 @@ void employee::printRecordHead(void)
 }
 void employee::printAllRecords(void)
 {
-	if (this->getHireYear()==0) return;
+	if (this->getHireYear()==0) {return;}
 	this->printRecordHead();
 	for(int i=0; i<5; i++)
 	{
+
 		this->printRecord(i);
-		if (this->getHireYear(i+1)==0) i=5;
+		if (i+1==5) break; //had to do this because i get an error if i+1 dosn't exist.
+		if (this->getSalary(i+1)==0) i=5;
 	}
+	std::cout << endl;
 }
 
 
@@ -175,8 +179,6 @@ int main()
 	employee staff("Mackland", "Bert", 3.50, 8,5,2014);
 	string fName="james", lName="roesemann";
 	float sal=17.76;
-	
-	
 	staff.setFirstName(fName);
 	staff.setLastName(lName);
 	staff.setHireDate(10, 16, 1988);
@@ -190,10 +192,11 @@ int main()
 	staff.setHireDate(4, 17, 3000);
 	staff.setSalary(78.34);
 	staff.setRecord("Segar", "Bob", 12.78, 9, 18, 1963);
-	
+	//testing
+	staff.printAllRecords();
+	staff.setRecord("Trump", "Donald", 7.01, 11, 8, 2016);
 	staff.printAllRecords();
 	
 	return 0;
 }
 
-//next test what hapend when you get more than 5.
