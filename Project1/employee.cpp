@@ -35,6 +35,8 @@ class employee
 		void printRecord(int num); //prints out the record number stated
 		void printRecordHead(void); //prints the top of the record collums
 		void printAllRecords(void); //prints all records and the header
+		void printRecordLine(int num); // prints the record line without the header
+
 
 		
 		//void setDateChanged( string date);
@@ -131,8 +133,17 @@ float employee::getSalary(int num)
 	if (num<0||num>4) exit(0);
 	return salary[num];
 }
-void employee::printRecord(void) {this->printRecord(0);} 
-void employee::printRecord(int num) 
+void employee::printRecord(void) 
+{
+	this->printRecordHead();
+	this->printRecordLine(0);
+} 
+void employee::printRecord(int num)
+{
+	this->printRecordHead();
+	this->printRecordLine(num);
+}
+void employee::printRecordLine(int num) 
 
 { 
 	std::cout<< std::left << std::setw(15) << this->getLastName(num);
@@ -163,9 +174,9 @@ void employee::printAllRecords(void)
 	for(int i=0; i<5; i++)
 	{
 
-		this->printRecord(i);
+		this->printRecordLine(i);
 		if (i+1==5) break; //had to do this because i get an error if i+1 dosn't exist.
-		if (this->getSalary(i+1)==0) i=5;
+		if (this->getSalary(i+1)==0) i=5; //fix this. salary could realy be zero. use hire date i guess
 	}
 	std::cout << endl;
 }
@@ -194,9 +205,8 @@ int main()
 	staff.setRecord("Segar", "Bob", 12.78, 9, 18, 1963);
 	//testing
 	staff.printAllRecords();
-	staff.setRecord("Trump", "Donald", 7.01, 11, 8, 2016);
-	staff.printAllRecords();
+	staff.printRecord(4);
 	
 	return 0;
 }
-
+// next you need to figure out how to constrain entered variables to a centin size. porbably warn the user. and create a function that can tell how long it's been since the employee was hired. also just so stuff looks goo write a function to print out numbers that are amaller than 10 with a 0 in front of them.
