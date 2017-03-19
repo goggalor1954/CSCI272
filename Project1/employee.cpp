@@ -230,4 +230,4 @@ int main()
 	
 	return 0;
 }
-// next you need to figure out how to constrain entered variables to a centin size. warn the user when they enter something worng. also just so stuff looks good write a function to print out numbers that are amaller than 10 with a 0 in front of them.function to list one or more selected records
+// next you need to figure out how to constrain entered variables to a centin size. warn the user when they enter something worng. also just so stuff looks good write a function to print out numbers that are amaller than 10 with a 0 in front of them.function to list one or more selected records. probably recursivly.
