@@ -206,6 +206,10 @@ int main()
 	//testing
 	staff.printAllRecords();
 	staff.printRecord(4);
+	time_t now=time(0);
+	//char *dt=ctime(&now);
+	tm *local=localtime(&now);
+	std::cout <<"testing " << 1+local->tm_mon;
 	
 	return 0;
 }
