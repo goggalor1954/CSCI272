@@ -36,6 +36,8 @@ class employee
 		void printRecordHead(void); //prints the top of the record collums
 		void printAllRecords(void); //prints all records and the header
 		void printRecordLine(int num); // prints the record line without the header
+		int yearsEmployed(int num);//returns how many years its been since the entered record has been hired
+		int yearsEmployed(void);//returns how many years it's been since the current record has been entered
 
 
 		
@@ -180,6 +182,30 @@ void employee::printAllRecords(void)
 	}
 	std::cout << endl;
 }
+int employee::yearsEmployed(int num)
+{
+	time_t now=time(0);
+	tm* local=localtime(&now);
+	if(this->getHireMonth(num)==(local->tm_mon+1))
+	{
+		if(this->getHireDay(num)>local->tm_mday)
+		{
+			return((local->tm_year+1900)-this->getHireYear(num)-1);
+		}
+	}
+	if(this->getHireMonth(num)>local->tm_mon+1)
+	{
+		return((local->tm_year+1900)-this->getHireYear(num)-1); 
+	}
+	return((local->tm_year+1900)-this->getHireYear(num));
+}
+int employee::yearsEmployed(void)
+{
+	return this->yearsEmployed(0);
+}
+	
+	//remember to add destructors
+	//check hire month
 
 
 
@@ -188,29 +214,20 @@ int main()
 {
 	//employee guy1;
 	employee staff("Mackland", "Bert", 3.50, 8,5,2014);
-	string fName="james", lName="roesemann";
-	float sal=17.76;
-	staff.setFirstName(fName);
-	staff.setLastName(lName);
-	staff.setHireDate(10, 16, 1988);
-	staff.setSalary(sal);	
-	staff.setFirstName("Frank");
-	staff.setLastName("Dee");
-	staff.setHireDate(12, 14, 1978);
-	staff.setSalary(78.02);
-	staff.setFirstName("Zap");
-	staff.setLastName("Branagan");
-	staff.setHireDate(4, 17, 3000);
-	staff.setSalary(78.34);
-	staff.setRecord("Segar", "Bob", 12.78, 9, 18, 1963);
+	staff.setRecord("Roesemann", "James", 17.76, 10, 16, 1988);
+	staff.setRecord("Dee", "Frank", 78.02, 12, 14, 1978);
+	staff.setRecord("Branagan", "Zap", 78.34, 3, 19, 2000);
+	staff.setRecord("Segar", "Bob", 12.78, 3, 17, 1963);
 	//testing
 	staff.printAllRecords();
-	staff.printRecord(4);
+	staff.printRecord(1);
 	time_t now=time(0);
-	//char *dt=ctime(&now);
-	tm *local=localtime(&now);
-	std::cout <<"testing " << 1+local->tm_mon;
+	//char *dt=ctime(&now); note to self. this is time in an easily readable format
+	tm *local=localtime(&now);//tm is a time object that can return easily manipulatable form of time
+	//std::cout <<"testing " << local->tm_year+1900 << endl;
+	//std::cout <<"testing " << local->tm_min <<" " << local->tm_sec; 
+	std::cout <<"testing " << staff.yearsEmployed(1) << endl;
 	
 	return 0;
 }
-// next you need to figure out how to constrain entered variables to a centin size. porbably warn the user. and create a function that can tell how long it's been since the employee was hired. also just so stuff looks goo write a function to print out numbers that are amaller than 10 with a 0 in front of them.
+// next you need to figure out how to constrain entered variables to a centin size. warn the user when they enter something worng. also just so stuff looks good write a function to print out numbers that are amaller than 10 with a 0 in front of them.function to list one or more selected records
