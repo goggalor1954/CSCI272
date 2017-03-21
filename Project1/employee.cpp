@@ -67,7 +67,7 @@ employee::employee(string lastN, string firstN, float sal, int month, int day, i
 	}
 	catch(int err_code) 
 	{
-		std::cout <<"You have entered an invalid date value" << endl;
+		std::cerr <<"You have entered an invalid date value" << endl;
 		return;
 	}
 	firstLastName[0][0]=firstN;
@@ -102,7 +102,7 @@ void employee::setHireDate(int month, int day, int year)
 	}
 	catch(int err_code) 
 	{
-		std::cout <<"You have entered an invalid date value" << endl;
+		std::cerr <<"You have entered an invalid date value" << endl;
 		return;
 	}
 	for(int i=4; i>0; i--)
@@ -126,7 +126,7 @@ void employee::setHireDate(int month, int day, int year, int num)
 	}
 	catch(int err_code) 
 	{
-		std::cout <<"You have entered an invalid date value" << endl;
+		std::cerr <<"You have entered an invalid date value" << endl;
 		return;
 	}
 	hireDate[num][2]=year;
@@ -150,7 +150,7 @@ void employee::setRecord(string lastN, string firstN, float sal, int month, int 
 	}
 	catch(int err_code) 
 	{
-		std::cout <<"You have entered an invalid date value" << endl;
+		std::cerr <<"You have entered an invalid date value" << endl;
 		return;
 	}
 	this->setLastName(lastN);
@@ -169,7 +169,7 @@ void employee::setRecord(string lastN, string firstN, float sal, int month, int 
 	}
 	catch(int err_code) 
 	{
-		std::cout <<"You have entered an invalid date value" << endl;
+		std::cerr <<"You have entered an invalid date value" << endl;
 		return;
 	}
 	this->setLastName(lastN, num );
@@ -370,8 +370,8 @@ int main()
 	staff.printRecord(2);
 	std::cout << staff.yearsEmployed(2)<< endl;
 	staff.printRecord(1);
-	std::cout << staff.yearsEmployed(1)<< endl;
+	staff.yearsEmployed(1);
+
 	
 	return 0;
 }
-//almost dne. just fix standart error. fix printRecordRange.
