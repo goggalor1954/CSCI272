@@ -31,8 +31,12 @@ class employee
 		int getHireMonth(void); //returns hireMonth
 		int getHireDay(void); //returns hireDay
 		int getHireYear(void); //returns hireYear
-		void printRecord(void); //prints the current primary record
-		void printRecord(int num); //prints out the record number stated
+		void printRecord(void); //prints the current primary record and the header
+		void printRecord(int num); //prints out the record number stated and the header
+		void printRecord(int num, int num2); //prints the selected records and the header
+		void printRecord(int num, int num2, int num3); //prints the selected records and the header
+		void printRecord(int num, int num2, int num3, int num4); //prints the selected records and the header
+		void printRecordRange(int begin, int end); //prints records in a range. begin being the newest record and end being the oldest record.
 		void printRecordHead(void); //prints the top of the record collums
 		void printAllRecords(void); //prints all records and the header
 		void printRecordLine(int num); // prints the record line without the header
@@ -144,6 +148,40 @@ void employee::printRecord(int num)
 {
 	this->printRecordHead();
 	this->printRecordLine(num);
+	std::cout << endl;
+
+}
+void employee::printRecord(int num, int num2)
+{
+	this->printRecordHead();
+	this->printRecordLine(num);
+	this->printRecordLine(num2);
+	std::cout << endl;
+
+}
+void employee::printRecord(int num, int num2, int num3)
+{
+	this->printRecordHead();
+	this->printRecordLine(num);
+	this->printRecordLine(num2);
+	this->printRecordLine(num3);
+	std::cout << endl;
+}
+void employee::printRecord(int num, int num2, int num3, int num4)
+{
+	this->printRecordHead();
+	this->printRecordLine(num);
+	this->printRecordLine(num2);
+	this->printRecordLine(num3);
+	this->printRecordLine(num4);
+	std::cout << endl;
+}
+void employee::printRecordRange(int begin, int end)
+{
+	//check to make sure the numberse are either equal or smaller. put an error message.
+	this->printRecordHead();
+	for(int i=begin; i<end+1; i++) this->printRecordLine(i);
+	std::cout << endl;
 }
 void employee::printRecordLine(int num) 
 
@@ -154,9 +192,11 @@ void employee::printRecordLine(int num)
 	std::cout << std::setw(2) << "";
 
 	std::cout<<std::setw(7)<<this->getSalary(num);
-	std::cout << std::setw(2) <<this->getHireMonth(num);
+	if(this->getHireMonth(num)<10) std::cout << std::setw(1) <<"0" <<this->getHireMonth(num);
+	else std::cout << std::setw(2) <<this->getHireMonth(num);
 	std::cout << std::setw(1) << "/"; 
-	std::cout << std::setw(2) <<this->getHireDay(num);
+	if(this->getHireDay(num)<10) std::cout << std::setw(1) << "0" <<this->getHireDay(num);
+	else std::cout << std::setw(2) << this->getHireDay(num);
 	std::cout << std::setw(1) << "/"; 
 	std::cout <<std::setw(4)<<this->getHireYear(num)<<endl;
 }
@@ -205,7 +245,6 @@ int employee::yearsEmployed(void)
 }
 	
 	//remember to add destructors
-	//check hire month
 
 
 
@@ -220,14 +259,7 @@ int main()
 	staff.setRecord("Segar", "Bob", 12.78, 3, 17, 1963);
 	//testing
 	staff.printAllRecords();
-	staff.printRecord(1);
-	time_t now=time(0);
-	//char *dt=ctime(&now); note to self. this is time in an easily readable format
-	tm *local=localtime(&now);//tm is a time object that can return easily manipulatable form of time
-	//std::cout <<"testing " << local->tm_year+1900 << endl;
-	//std::cout <<"testing " << local->tm_min <<" " << local->tm_sec; 
-	std::cout <<"testing " << staff.yearsEmployed(1) << endl;
-	
 	return 0;
 }
-// next you need to figure out how to constrain entered variables to a centin size. warn the user when they enter something worng. also just so stuff looks good write a function to print out numbers that are amaller than 10 with a 0 in front of them.function to list one or more selected records. probably recursivly.
+// next you need to figure out how to constrain entered variables to a centin size. warn the user when they enter something worng. 
+//you need to be able to change specific records
