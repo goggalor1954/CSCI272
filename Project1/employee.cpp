@@ -15,10 +15,15 @@ class employee
 		employee(void); //default constructor
 		employee(string lastN, string firstN, float sal, int month, int day, int year); //sets an entire record at once when values are entered apropriatly.
 		void setFirstName(string name); // sets firstName
+		void setFirstName(string name, int num); //sets firstName for he specified record number.
 		void setLastName(string name); //sets lastName
+		void setLastName(string name, int num); // sets last name for the specified record number.
 		void setHireDate(int month, int day, int year); //sets hireDate
+		void setHireDate(int month, int day, int year, int num); //set hireDate for the specified record number.
 		void setSalary(float sal); //sets Salary
-		void setRecord(string lastN, string firstN, float sal, int month, int day, int year); //sets an entire record when values are enterd apropriatly.
+		void setSalary(float sal, int num); //sets salary for the specified record number;
+		void setRecord(string lastN, string firstN, float sal, int month, int day, int year); //sets an entire record.
+		void setRecord(string lastN, string firstN, float sal, int month, int day, int year, int num); //changes an entire record when record entry number is specified.
 		float getSalary(void); //returns Salary
 		string getFirstName(void); //returns firstName
 		string getLastName(void);  //returns lastName
@@ -42,23 +47,29 @@ class employee
 		void printRecordLine(int num); // prints the record line without the header
 		int yearsEmployed(int num);//returns how many years its been since the entered record has been hired
 		int yearsEmployed(void);//returns how many years it's been since the current record has been entered
-
-
-		
-		//void setDateChanged( string date);
-		//string getDateChanged(void);
 		
 		
 	private:
 		string firstLastName[5][2]; //5 arrays of 2 collums. collum 0 is first name. collum 1 is last name
 		int hireDate[5][3]; //5 rows, 3 collums. collum 0 has month. 1 had day, 2 has year
 		float salary[5];
-		//string dateChanged[5];
 };
 
 employee::employee(void) {} //default constructor
 employee::employee(string lastN, string firstN, float sal, int month, int day, int year)
 {
+	try
+	{
+		if(month<1 || month>12 || day<1 || day>31 || year<1900 || year>9999)
+		{
+			throw 1;
+		}
+	}
+	catch(int err_code) 
+	{
+		std::cout <<"You have entered an invalid date value" << endl;
+		return;
+	}
 	firstLastName[0][0]=firstN;
 	firstLastName[0][1]=lastN;
 	salary[0]=sal;
@@ -68,18 +79,32 @@ employee::employee(string lastN, string firstN, float sal, int month, int day, i
 }
 
 
-void employee::setFirstName(string name) //adds first name to the begining of the array while incrementing the other values.
+void employee::setFirstName(string name)
 {
 	for(int i=4; i>0; i--) firstLastName[i][0]=firstLastName[i-1][0];
 	firstLastName[0][0]=name;
 }
-void employee::setLastName(string name) //adds last name to the begining of the array while incrementing the other values.
+void employee::setFirstName(string name, int num) {firstLastName[num][0]=name;}
+void employee::setLastName(string name) 
 {
 	for(int i=4; i>0; i--) firstLastName[i][1]=firstLastName[i-1][1];
 	firstLastName[0][1]=name;
 }
+void employee::setLastName(string name, int num) {firstLastName[num][1]=name;}
 void employee::setHireDate(int month, int day, int year)
 {
+	try
+	{
+		if(month<1 || month>12 || day<1 || day>31 || year<1900 || year>9999)
+		{
+			throw 1;
+		}
+	}
+	catch(int err_code) 
+	{
+		std::cout <<"You have entered an invalid date value" << endl;
+		return;
+	}
 	for(int i=4; i>0; i--)
 	{
 		hireDate[i][2]=hireDate[i-1][2];
@@ -90,17 +115,67 @@ void employee::setHireDate(int month, int day, int year)
 	hireDate[0][1]=day;
 	hireDate[0][0]=month;
 }
+void employee::setHireDate(int month, int day, int year, int num)
+{
+	try
+	{
+		if(month<1 || month>12 || day<1 || day>31 || year<1900 || year>9999)
+		{
+			throw 1;
+		}
+	}
+	catch(int err_code) 
+	{
+		std::cout <<"You have entered an invalid date value" << endl;
+		return;
+	}
+	hireDate[num][2]=year;
+	hireDate[num][1]=day;
+	hireDate[num][0]=month;
+}
 void employee::setSalary(float sal)
 {
 	for (int i=4; i>0; i--) salary[i]=salary[i-1];
 	salary[0]=sal;
 }
+void employee::setSalary(float sal, int num){ salary[num]=sal;}
 void employee::setRecord(string lastN, string firstN, float sal, int month, int day, int year)
 {
+	try
+	{
+		if(month<1 || month>12 || day<1 || day>31 || year<1900 || year>9999)
+		{
+			throw 1;
+		}
+	}
+	catch(int err_code) 
+	{
+		std::cout <<"You have entered an invalid date value" << endl;
+		return;
+	}
 	this->setLastName(lastN);
 	this->setFirstName(firstN);
 	this->setSalary(sal);
 	this->setHireDate(month,  day,  year);
+}
+void employee::setRecord(string lastN, string firstN, float sal, int month, int day, int year, int num)
+{
+	try
+	{
+		if(month<1 || month>12 || day<1 || day>31 || year<1900 || year>9999)
+		{
+			throw 1;
+		}
+	}
+	catch(int err_code) 
+	{
+		std::cout <<"You have entered an invalid date value" << endl;
+		return;
+	}
+	this->setLastName(lastN, num );
+	this->setFirstName(firstN, num);
+	this->setSalary(sal, num);
+	this->setHireDate(month,  day,  year, num);
 }
 
 string employee::getFirstName(int num)
@@ -108,8 +183,8 @@ string employee::getFirstName(int num)
 	if(num<0||num>4) exit(0);
 	return firstLastName[num][0];
 }
-string employee::getFirstName(void) {return firstLastName[0][0];}//returns fist name in the first array
-string employee::getLastName(void) {return firstLastName[0][1];} //returns the last name in the first array.
+string employee::getFirstName(void) {return firstLastName[0][0];}
+string employee::getLastName(void) {return firstLastName[0][1];} 
 string employee::getLastName(int num)
 {
 	if(num<0||num>4) exit(0);
@@ -179,19 +254,30 @@ void employee::printRecord(int num, int num2, int num3, int num4)
 void employee::printRecordRange(int begin, int end)
 {
 	//check to make sure the numberse are either equal or smaller. put an error message.
+	try
+	{
+		if(begin<0 ||begin>4 || end<0 || end>4 || end<begin)
+		{
+			throw 1;
+		}
+	}
+	catch(int err_code)
+	{
+		std::cerr << "you have entered an invalid range\n";
+		return;
+	}
 	this->printRecordHead();
 	for(int i=begin; i<end+1; i++) this->printRecordLine(i);
 	std::cout << endl;
 }
 void employee::printRecordLine(int num) 
-
 { 
 	std::cout<< std::left << std::setw(15) << this->getLastName(num);
 	std::cout << std::setw(2) << "";
 	std::cout << std::setw(15)<<this->getFirstName(num);
 	std::cout << std::setw(2) << "";
-
 	std::cout<<std::setw(7)<<this->getSalary(num);
+	std::cout << std::setw(2) << "";
 	if(this->getHireMonth(num)<10) std::cout << std::setw(1) <<"0" <<this->getHireMonth(num);
 	else std::cout << std::setw(2) <<this->getHireMonth(num);
 	std::cout << std::setw(1) << "/"; 
@@ -205,6 +291,7 @@ void employee::printRecordHead(void)
 	std::cout << left <<std::setw(15)<<"Last Name:";
 	std::cout << std::setw(2) << "";
 	std::cout << std::setw(15)<<"First Name:";
+	std::cout << std::setw(2) << "";
 	std::cout << std::setw(7) <<"Salary:";
 	std::cout << std::setw(2) << "";
 	std::cout <<std::setw(10) <<"Hire Date:" <<endl;
@@ -243,23 +330,48 @@ int employee::yearsEmployed(void)
 {
 	return this->yearsEmployed(0);
 }
-	
-	//remember to add destructors
-
 
 
 
 int main()
 {
-	//employee guy1;
+	//not sure if you wanted main left blank or not but hew s just something to demonstrate that the class works.
 	employee staff("Mackland", "Bert", 3.50, 8,5,2014);
+	staff.printAllRecords();
+	std::cout << "populating and printing all records\n";
 	staff.setRecord("Roesemann", "James", 17.76, 10, 16, 1988);
-	staff.setRecord("Dee", "Frank", 78.02, 12, 14, 1978);
+	staff.setRecord("Reynolds", "Frank", 78.02, 12, 14, 1978);
 	staff.setRecord("Branagan", "Zap", 78.34, 3, 19, 2000);
 	staff.setRecord("Segar", "Bob", 12.78, 3, 17, 1963);
-	//testing
 	staff.printAllRecords();
+	std::cout<<"adding a new record\n";
+	staff.setRecord("Gunderson", "Gus", 30.23, 7, 15,1996);
+	staff.printAllRecords();
+	std::cout << "completely changing an old record\n";
+	staff.setRecord("Kent", "Clark", 100.25, 12, 16, 1945, 3);
+	staff.printAllRecords();
+	std::cout <<"printing out a selected record\n";
+	staff.printRecord(2);
+	std::cout<<"printing out multiple records\n";
+	staff.printRecord(3, 0);
+	std::cout << "printing out a range of records \n";
+	staff.printRecordRange(1,4);
+	std::cout <<"changing the date of a selected record\n";
+	staff.setHireDate(3, 21, 2007, 1);
+	staff.printRecord(1);
+	std::cout << "changing the first and last name of a selected record\n";
+	staff.setLastName("Baggens", 3);
+	staff.setFirstName("Bilbo", 3);
+	staff.printAllRecords();
+	std::cout<< "changing the salary of a selected record\n";
+	staff.setSalary(99.95, 2);
+	staff.printAllRecords();
+	std::cout <<"calculating how many years it's been since an employee has been hired.\n";
+	staff.printRecord(2);
+	std::cout << staff.yearsEmployed(2)<< endl;
+	staff.printRecord(1);
+	std::cout << staff.yearsEmployed(1)<< endl;
+	
 	return 0;
 }
-// next you need to figure out how to constrain entered variables to a centin size. warn the user when they enter something worng. 
-//you need to be able to change specific records
+//almost dne. just fix standart error. fix printRecordRange.
