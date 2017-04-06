@@ -12,27 +12,9 @@ using namespace std;
 class employee
 {
 	public:
-		employee(void); //default constructor
-		employee(string lastN, string firstN, float sal, int month, int day, int year); //sets an entire record at once when values are entered apropriatly.
-		void setFirstName(string name); // sets firstName
-		void setFirstName(string name, int num); //sets firstName for he specified record number.
-		void setLastName(string name); //sets lastName
-		void setLastName(string name, int num); // sets last name for the specified record number.
-		void setHireDate(int month, int day, int year); //sets hireDate
-		void setHireDate(int month, int day, int year, int num); //set hireDate for the specified record number.
-		void setSalary(float sal); //sets Salary
-		void setSalary(float sal, int num); //sets salary for the specified record number;
-		void setRecord(string lastN, string firstN, float sal, int month, int day, int year); //sets an entire record.
-		void setRecord(string lastN, string firstN, float sal, int month, int day, int year, int num); //changes an entire record when record entry number is specified.
-		float getSalary(void); //returns Salary
-		string getFirstName(void); //returns firstName
-		string getLastName(void);  //returns lastName
-		string getFirstName(int num); // returns firstName from the record number given
-		string getLastName(int num);//returns lastName from the record number given
-		int getHireMonth(int num); //returns hireMonth from therecord number given
+
 		int getHireDay(int num); //returns hireDay from the record number given
 		int getHireYear(int num); //returns hireYear from the number given
-		float getSalary(int num); //returns salary from the record number given
 		int getHireMonth(void); //returns hireMonth
 		int getHireDay(void); //returns hireDay
 		int getHireYear(void); //returns hireYear

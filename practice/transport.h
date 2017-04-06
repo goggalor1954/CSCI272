@@ -48,37 +48,128 @@ class car: public vehicle
 	double gasTank; //how much fule is in the tank	
 	double price;
 	int mpg;
-
 };
 
+//need to put this on hold. inheritance not working.
 class dimond
 {
 	public:
-		dimond(){status="";}
-		virtual string getStatus()=0;
-		virtual void setStatus(string currentStatus)=0;
+		virtual void repeatStatus()=0;
+		void setStatus(string currentStatus){status=currentStatus;}
+		string getStatus(){return this->status;}
+		/*{
+			if(ptr==NULL) return "";
+			return *ptr;
+		}*/
+		dimond(void)
+		{
+			status="";
+			ptr=&status;
+		}
+
 	private:
-	string status;
+		string status;
+		string *ptr;
 	
 };
-class whiteDimond : public dimond
+class whiteDimond : public virtual dimond
 {
 	public:
-	string getStatus(){return this->getStatus();}
-	void setStatus(string currentStatus){this->setStatus(currentStatus);}
+		//void setStatus(string currentStatus){status=currentStatus;}
+		//string getStatus(){return this->status;}
+		void repeatStatus()
+		{
+			for(int i=0; i<3; i++)
+			{
+				std::cout << this->getStatus() << " ";
+			}
+		}
+	//whiteDimond() : dimond(){}
+	
 	
 };
-class blueDimond : public dimond
+class blueDimond : public virtual dimond
 {
 	public:
-	string getStatus(){return this->getStatus();}
-	void setStatus(string currentStatus){this->setStatus(currentStatus);
+		//void setStatus(string currentStatus){status=currentStatus;}
+		//string getStatus(){return this->status;}
+		void repeatStatus()
+			{
+				for(int i=0; i<4; i++)
+				{
+					std::cout << this->getStatus() << " ";
+				}
+			}
+	//	blueDimond() : dimond(){}
+
+	
 };
-class yellowDimond : public whiteDimond, public blueDimond//this will not work. mutiple inheritance
+class yellowDimond : public  whiteDimond, public  blueDimond//this will not work. mutiple inheritance
 {
 	public:
-	string getStatus(){return this->getStatus();}
-	void setStatus(string currentStatus){this->setStatus(currentStatus);
+		void repeatStatus(){blueDimond::repeatStatus();}
+		//string getStatus(){blueDimond::getStatus();}
+		//string blueDimond::getStatus();
+		//void setStatus(string currentStatus){blueDimond::setStatus(currentStatus);}
+		//yellowDimond() : blueDimond(){}
+
+		
+};
+class pinkDimond : public  whiteDimond, public blueDimond
+{
+	public:
+		void repeatStatus(){whiteDimond::repeatStatus();}
+		//string getStatus(){whiteDimond::getStatus();}
+		//void setStatus(string currentStatus){whiteDimond::setStatus(currentStatus);}
+	//	pinkDimond()  : whiteDimond(){}
+
+		
 };
 
+class NodeA
+{
+	private:
+		int head;
+		NodeA *next;
+	public:
+		int getHead(){return head;}
+		void setHead(int headx){head=headx;}
+		void setNext(NodeA *ptr){next=ptr;}
+		NodeA getNext(){return *next;}
+};
+
+//operator overloading;
+class bag
+{
+	private:
+		int cash;
+	public:
+		bag(int x){cash=x;}
+		bag(){cash=0;}
+		int getCash(){return cash;}
+		void setCash(int x){cash=x;}
+		bag* operator+(bag x){return new bag(this->getCash()+x.getCash());}
+		int operator-(bag x){return this->getCash()-x.getCash();}
+		void operator^(bag y){this->setCash(this->getCash()*y.getCash());}
+};
+
+class putout
+{
+	private:
+	int *dynamic;
+	public:
+	int getDynamic(int x){return dynamic[x];}
+	void setDynamic(int x, int y){dynamic[x]=y;}
+	putout(){dynamic=new int[30];} //default. will not delete yet
+	void assign()
+	{
+		srand(time(0));
+		for(int i=0; i<30; i++){
+			this->setDynamic(i, rand()%30+1);
+		}
+	}
+};
+			
+
+	
 #endif
