@@ -39,6 +39,16 @@ int main()
 	std::cout << sedan.getDriver() << " drives a " << sedan.getModel() << " and has " << sedan.getGasTank() << " gallons of fule in his tank." <<endl;
 	std::cout << "it cost him $" << sedan.costToCommute(3.5) << " to travel the same distance."  << endl;
 
-
+	dimond pDimond;
+	blueDimond bDimond;
+	whiteDimond wDimond;
+	yellowDimond yDimond;
+	pDimond.setStatus("shattered");
+	bDimond.setStatus("crying");
+	wDimond.setStatus("hiding");
+	std::cout << "pDimond: " <<pDimond.getStatus() <<"\nbDimond: " << bDimond.getStatus() << "\nwDimind: " <<wDimond.getStatus() <<endl;
+	yDimond.setStatus("CLOD");//this will not work. mutiple inheritance
+	std::cout << "yDimond: " <<yDimond.getStatus() << endl;
+	 
 	return 0;
 }

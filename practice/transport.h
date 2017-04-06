@@ -55,20 +55,30 @@ class dimond
 {
 	public:
 		dimond(){status="";}
-		string getStatus(){return status;}
-		void setStatus(string currentStatus){status=currentStatus;}
+		virtual string getStatus()=0;
+		virtual void setStatus(string currentStatus)=0;
 	private:
 	string status;
 	
 };
 class whiteDimond : public dimond
 {
+	public:
+	string getStatus(){return this->getStatus();}
+	void setStatus(string currentStatus){this->setStatus(currentStatus);}
+	
 };
 class blueDimond : public dimond
 {
+	public:
+	string getStatus(){return this->getStatus();}
+	void setStatus(string currentStatus){this->setStatus(currentStatus);
 };
-class yellowDimond : public dimond
+class yellowDimond : public whiteDimond, public blueDimond//this will not work. mutiple inheritance
 {
-};//finish this up
+	public:
+	string getStatus(){return this->getStatus();}
+	void setStatus(string currentStatus){this->setStatus(currentStatus);
+};
 
 #endif
