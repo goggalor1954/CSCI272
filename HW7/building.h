@@ -16,7 +16,7 @@ class building
 		int church[2][2];
 		string store;
 		string tower[3][3];
-		int rent[2];//represents the first and second half of a float value.
+		float rent;//represents the first and second half of a float value.
 	public:
 		//i think for this to work i need to write acessor funtions ratherer than the regular get function
 		void setHouse(int x){house=x;}
@@ -54,12 +54,18 @@ class building
 			tower[2][2]=z;
 		}
 		string getTowerAt(int x, int y){return tower[x][y];}
-		void setRent(float x)
-		{
-			rent[0]=x.floor();
-			rent[i]=				
-		}
+		void setRent(float x){rent=x;}
 		float getRent() {return rent;}
+		//testing
+		/*void save(ofstream& of)
+		{
+			of.write(&house, sizeof(house));
+			of.write(office, sizeof(office));
+			of.write(church, sizeof(church));
+			of.write()*/
+
+		//}
+		//void load(ifstream& inf);
 
 };
 #endif

@@ -13,7 +13,7 @@ using namespace std;
 		if (x[y]=='\0') return string();
 		return string(1, x[y])+stringBuilder(x, y+1);
 	}
-	stringBuilder(char x[]){return stringBuilder(x, 0);}
+	string stringBuilder(char x[]){return stringBuilder(x, 0);}
 //you need to convete a float to a character array.
 //actually a better idea would be to converte the first half of the float to an int. than the secion after the period to another int and store those in an array...nevermind cant figure out how to do this.
 
