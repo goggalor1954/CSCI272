@@ -4,7 +4,7 @@
 
 
 #include <iostream>
-#include <fStream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
@@ -48,12 +48,18 @@ class employee
 		void printRecordLine(int num); // prints the record line without the header
 		int yearsEmployed(int num);//returns how many years its been since the entered record has been hired
 		int yearsEmployed(void);//returns how many years it's been since the current record has been entered
-		
+		string stringBuilder(char x[], int y);
+		string stringBuilder(char x[]);
+		char* stringDestructor(string input, char output[]);
 		
 	private:
-		string firstLastName[5][2]; //5 arrays of 2 collums. collum 0 is first name. collum 1 is last name
+	/*
+		string firstLastName[5][2]; //5 arrays of 2 collums. collum 0 is first name. collum 1 is last name	*/
 		int hireDate[5][3]; //5 rows, 3 collums. collum 0 has month. 1 had day, 2 has year
 		float salary[5];
+		char firstName[5];
+		char lastNamel[5];
+		
 };
 
 employee::employee(void) {} //default constructor
@@ -77,6 +83,8 @@ employee::employee(string lastN, string firstN, float sal, int month, int day, i
 	hireDate[0][0]=month;
 	hireDate[0][1]=day;
 	hireDate[0][2]=year;
+
+
 }
 
 
@@ -331,7 +339,23 @@ int employee::yearsEmployed(void)
 {
 	return this->yearsEmployed(0);
 }
-
+string employee::stringBuilder(char x[], int y)
+	{
+		if (x[y]=='\0') return string();
+		return string(1, x[y])+stringBuilder(x, y+1);
+	}
+string employee::stringBuilder(char x[]){return stringBuilder(x, 0);}
+char* employee::stringDestructor(string input, char output[])
+	//remeber that ou need to pass it a new array of size input +1 
+	{
+		//char output[input.size()+1];
+		for(int i=0; i<input.size(); i++)
+		{
+			output[i]=input.at(i);
+		}
+		output[input.size()]='\0';
+		return output;
+	}
 
 
 int main()

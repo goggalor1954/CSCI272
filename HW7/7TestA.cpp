@@ -13,6 +13,9 @@ using namespace std;
 		if (x[y]=='\0') return string();
 		return string(1, x[y])+stringBuilder(x, y+1);
 	}
+	stringBuilder(char x[]){return stringBuilder(x, 0);}
+//you need to convete a float to a character array.
+//actually a better idea would be to converte the first half of the float to an int. than the secion after the period to another int and store those in an array...nevermind cant figure out how to do this.
 
 	char* stringDestructor(string input, char output[])
 	//remeber that ou need to pass it a new array of size input +1 
@@ -35,6 +38,7 @@ int main()
 	West.setChurch(32,42,62,2);
 	West.setStore("Deli");
 	West.setTower("She", "Sells", "sea", "shells", "by", "the", "sea", "shore", "!");
+	West.setRent(17.95);
 
 	ofstream outfile("west.dat", ios::out | ios::binary);
 	outfile.write(reinterpret_cast<const char*>(&West), sizeof(building));
@@ -60,6 +64,7 @@ int main()
 	string muf="muffins";
 	char* test=stringDestructor(muf, new char[muf.size()]);
 	std::cout << stringBuilder( test, 0)<< endl;
+	
 
 
 	return 0;

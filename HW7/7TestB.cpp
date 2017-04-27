@@ -18,6 +18,7 @@ int main()
 	std::cout << "TEST 2d: " << east.getChurchAt(0,1) << endl;
 	std::cout << "TEST STRING: " << east.getStore() << endl;
 	std::cout << "Test string array: " << east.getTowerAt(0,2) <<endl;
+	std::cout << "Test float: " << east.getRent() << endl;
 
 	return 0;
 }
