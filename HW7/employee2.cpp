@@ -1,7 +1,3 @@
-//James Roesemann
-//Project1
-
-
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -47,26 +43,18 @@ class employee
 		void printRecordLine(int num); // prints the record line without the header
 		int yearsEmployed(int num);//returns how many years its been since the entered record has been hired
 		int yearsEmployed(void);//returns how many years it's been since the current record has been entered
-
-
-		void charFNameBuilder(int pos, string input);
-		void charLNameBuilder(int pos, string input);
-		void charBuilder(int pos, string input, char x[][16], int pos2);
-		string fNameBuilder(int pos);
-		string lNameBuilder(int pos);
-		string stringBuilder(char x[][16], int pos, int pos2);
-		char getFName(int pos, int pos2);
-		char getLName(int pos, int pos2);
-		void setFName(int pos, int pos2, char x);
-		void setLName(int pos, int pos2, char x);
-		void pushFname(int pos, int pos2);
-		void pushLName(int col1, int col2);
+		string stringBuilder(char x[], int y);
+		string stringBuilder(char x[]);
+		char* stringDestructor(string input, char output[]);
 		
 	private:
 	
-		int hireDay[5], hireMonth[5], hireYear[5];
+		string firstLastName[5][2]; //5 arrays of 2 collums. collum 0 is first name. collum 1 is last name	
+		int hireDate[5][3]; //5 rows, 3 collums. collum 0 has month. 1 had day, 2 has year
+		//int hireDay[5], hireMonth[5], hireYear[5];
 		float salary[5];
-		char fName[5][16], lName[5][16];
+		char firstName[5], lastNamel[5];
+		//string firstName[5]. lastName[5];
 		
 };
 
@@ -85,33 +73,30 @@ employee::employee(string lastN, string firstN, float sal, int month, int day, i
 		std::cerr <<"You have entered an invalid date value" << endl;
 		return;
 	}
-	charFNameBuilder(0, firstN);
-	charLNameBuilder(0, lastN);
+	firstLastName[0][0]=firstN;
+	firstLastName[0][1]=lastN;
 	salary[0]=sal;
-	hireDay[0]=month;
-	hireMonth[0]=day;
-	hireYear[0]=year;
+	hireDate[0][0]=month;
+	hireDate[0][1]=day;
+	hireDate[0][2]=year;
+	
+
+
 }
 
 
 void employee::setFirstName(string name)
 {
-	for(int i=4; i>0; i--)
-	{
-		pushFname(i-1, i);
-	}
-	charFNameBuilder(0, name);
+	for(int i=4; i>0; i--) firstLastName[i][0]=firstLastName[i-1][0];
+	firstLastName[0][0]=name;
 }
-void employee::setFirstName(string name, int num) {charFNameBuilder(num,name);}
+void employee::setFirstName(string name, int num) {firstLastName[num][0]=name;}
 void employee::setLastName(string name) 
 {
-	for(int i=4; i>0; i--)
-	{
-		pushLName(i-1, i);
-	}
-	charLNameBuilder(0, name);
+	for(int i=4; i>0; i--) firstLastName[i][1]=firstLastName[i-1][1];
+	firstLastName[0][1]=name;
 }
-void employee::setLastName(string name, int num) {charLNameBuilder(num,name);}
+void employee::setLastName(string name, int num) {firstLastName[num][1]=name;}
 void employee::setHireDate(int month, int day, int year)
 {
 	try
@@ -128,13 +113,13 @@ void employee::setHireDate(int month, int day, int year)
 	}
 	for(int i=4; i>0; i--)
 	{
-		hireDay[i]=hireDay[i-1];
-		hireMonth[i]=hireMonth[i-1];
-		hireYear[i]=hireYear[i-1];
+		hireDate[i][2]=hireDate[i-1][2];
+		hireDate[i][1]=hireDate[i-1][1];
+		hireDate[i][0]=hireDate[i-1][0];
 	}
-	hireDay[0]=day;
-	hireMonth[0]=month;
-	hireYear[0]=year;
+	hireDate[0][2]=year;
+	hireDate[0][1]=day;
+	hireDate[0][0]=month;
 }
 void employee::setHireDate(int month, int day, int year, int num)
 {
@@ -150,9 +135,9 @@ void employee::setHireDate(int month, int day, int year, int num)
 		std::cerr <<"You have entered an invalid date value" << endl;
 		return;
 	}
-	hireDay[num]=day;
-	hireMonth[num]=month;
-	hireYear[num]=year;
+	hireDate[num][2]=year;
+	hireDate[num][1]=day;
+	hireDate[num][0]=month;
 }
 void employee::setSalary(float sal)
 {
@@ -202,32 +187,32 @@ void employee::setRecord(string lastN, string firstN, float sal, int month, int 
 string employee::getFirstName(int num)
 {
 	if(num<0||num>4) exit(0);
-	return fNameBuilder(num);
+	return firstLastName[num][0];
 }
-string employee::getFirstName(void) {return fNameBuilder(0);}
-string employee::getLastName(void) {return lNameBuilder(0);} 
+string employee::getFirstName(void) {return firstLastName[0][0];}
+string employee::getLastName(void) {return firstLastName[0][1];} 
 string employee::getLastName(int num)
 {
 	if(num<0||num>4) exit(0);
-	return lNameBuilder(num);
+	return firstLastName[num][1];
 }		
-int employee::getHireDay(void) {return hireDay[0];}
+int employee::getHireDay(void) {return hireDate[0][1];}
 int employee::getHireDay(int num)
 {
 	if(num<0||num>4) exit(0);
-	return hireDay[num];
+	return hireDate[num][1];
 }
-int employee::getHireMonth(void) {return hireMonth[0];}
+int employee::getHireMonth(void) {return hireDate[0][0];}
 int employee::getHireMonth(int num)
 {
 	if(num<0||num>4) exit(0);
-	return hireMonth[num];
+	return hireDate[num][0];
 }
-int employee::getHireYear(void) {return hireYear[0];}
+int employee::getHireYear(void) {return hireDate[0][2];}
 int employee::getHireYear(int num)
 {
 	if(num<0||num>4) exit(0);
-	return hireYear[num];
+	return hireDate[num][2];
 }
 float employee::getSalary(void) {return salary[0];}
 float employee::getSalary(int num)
@@ -350,93 +335,34 @@ int employee::yearsEmployed(int num)
 int employee::yearsEmployed(void)
 {
 	return this->yearsEmployed(0);
-
-
-
-
 }
-void employee::charFNameBuilder(int pos, string input){ charBuilder(pos, input, fName, 0);}
-void employee::charLNameBuilder(int pos, string input){charBuilder(pos, input, lName, 0);}
-void employee::charBuilder(int pos, string input, char x[][16], int pos2)
-{
-	if(input.size()==pos2 || pos2==15){x[pos][pos2]='\0';}
-	else
+string employee::stringBuilder(char x[], int y)
 	{
-		x[pos][pos2]=input.at(pos2);
-		charBuilder(pos, input, x, pos2+1);
+		if (x[y]=='\0') return string();
+		return string(1, x[y])+stringBuilder(x, y+1);
 	}
-} 
-string employee::fNameBuilder(int pos){return stringBuilder(fName, pos, 0);}
-string employee::lNameBuilder(int pos){return stringBuilder(lName, pos, 0);}
-string employee::stringBuilder(char x[][16], int pos, int pos2)
-{
-	if(x[pos][pos2]=='\0') return string();
-	return string(1, x[pos][pos2])+stringBuilder(x, pos, pos2+1);
-}
+string employee::stringBuilder(char x[]){return stringBuilder(x, 0);}
+char* employee::stringDestructor(string input, char output[])
+	//remeber that ou need to pass it a new array of size input +1 
+	{
+		//char output[input.size()+1];
+		for(int i=0; i<input.size(); i++)
+		{
+			output[i]=input.at(i);
+		}
+		output[input.size()]='\0';
+		return output;
+	}
 
-char employee::getFName(int pos, int pos2){return fName[pos][pos2];}
-char employee::getLName(int pos, int pos2){return lName[pos][pos2];}
-void employee::setFName(int pos, int pos2, char x){fName[pos][pos2]=x;}
-void employee::setLName(int pos, int pos2, char x){lName[pos][pos2]=x;}
-void employee::pushFname(int pos, int pos2)
-{
-	for(int i=0; i<16; i++)
-	{
-		fName[pos2][i]=fName[pos][i];
-	}
-}
-void employee::pushLName(int col1, int col2)
-{
-	for(int i=0; i<16; i++)
-	{
-		lName[col2][i]=lName[col1][i];
-	}
-}
 
 int main()
 {
-	//not sure if you wanted main left blank or not but here is just something to demonstrate that the class works.
-	employee staff("Mackland", "Bert", 3.50, 8,5,2014);
-	staff.printAllRecords();
-	std::cout << "populating and printing all records\n";
-	staff.setRecord("Roesemann", "James", 17.76, 10, 16, 1988);
-	staff.setRecord("Reynolds", "Frank", 78.02, 12, 14, 1978);
-	staff.setRecord("Branagan", "Zap", 78.34, 3, 19, 2000);
-	staff.setRecord("Segar", "Bob", 12.78, 3, 17, 1963);
-	staff.printAllRecords();
-	std::cout<<"adding a new record\n";
-	staff.setRecord("Gunderson", "Gus", 30.23, 7, 15,1996);
-	staff.printAllRecords();
-	std::cout << "completely changing an old record\n";
-	staff.setRecord("Kent", "Clark", 100.25, 12, 16, 1945, 3);
-	staff.printAllRecords();
-	std::cout <<"printing out a selected record\n";
-	staff.printRecord(2);
-	std::cout<<"printing out multiple records\n";
-	staff.printRecord(3, 0);
-	std::cout << "printing out a range of records \n";
-	staff.printRecordRange(1,4);
-	std::cout <<"changing the date of a selected record\n";
-	staff.setHireDate(3, 21, 2007, 1);
-	staff.printRecord(1);
-	std::cout << "changing the first and last name of a selected record\n";
-	staff.setLastName("Baggens", 3);
-	staff.setFirstName("Bilbo", 3);
-	staff.printAllRecords();
-	std::cout<< "changing the salary of a selected record\n";
-	staff.setSalary(99.95, 2);
-	staff.printAllRecords();
-	std::cout <<"calculating how many years it's been since an employee has been hired.\n";
-	staff.printRecord(2);
-	std::cout << staff.yearsEmployed(2)<< endl;
-	staff.printRecord(1);
-	staff.yearsEmployed(1);
+	employee HRstaff;
 
-	//HW7
-	ofstream outfile ("employes.dat", ios::out | ios::binary);
-	outfile.write (reinterpret_cast<char * >(&staff), sizeof (employee));
+	ifstream infile ("employes.dat", ios::in | ios::binary);
+	infile.read( reinterpret_cast<char*>(&HRstaff), sizeof(employee));
 
+	HRstaff.printAllRecords();
 
-	
 	return 0;
 }

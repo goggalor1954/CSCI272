@@ -12,12 +12,12 @@ int main()
 	north.setInt1(42);
 	north.setIntArr(23, 45, 67);
 	north.setString1("Sun");
-	north.setStringArr("red", "yellow", "green");
+	//north.setStringArr("red", "yellow", "green");
 	north.setFloat1(12.3);
-	north.setFloatArr(56.3, 99.95, 12.4);
+	//north.setFloatArr(56.3, 99.95, 12.4);
 //testing
-	char kip[]={'m','u','d','k','i','p','\0'};
-	north.setCharArr2( kip);
+	//char kip[]={'m','u','d','k','i','p','\0'};
+	//north.setCharArr2( kip);
 
 
 	ofstream outfile("north.dat", ios::out | ios::binary);

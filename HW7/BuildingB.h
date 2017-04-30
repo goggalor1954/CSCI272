@@ -12,13 +12,13 @@ private:
 	char charArr[3];
 	//going to set the arrays as size 3 for now. later i want so see what happens if i just try and pass whole arrays to them.
 
-	char* charArr2;
+	//char* charArr2;
 	int int1;
 	int intArr[3];
 	string string1;
-	string stringArr[3];
+	//string stringArr[3];
 	float float1;
-	float floatArr[3];
+	//float floatArr[3];
 
 public:
 	void setChar1(char x){char1=x;}
@@ -31,9 +31,9 @@ public:
 	}
 	char* getCharArr(){return charArr;}
 
-	//testing
+	/*//testing
 	void setCharArr2(char x[]){charArr2=x;}
-	char* getCharArr2(){return charArr2;}
+	char* getCharArr2(){return charArr2;}*/
 
 	void setInt1(int x){int1=x;}
 	int getInt1(){return int1;}
@@ -46,22 +46,22 @@ public:
 	int* getIntArr(){return intArr;}
 	void setString1(string x){string1=x;}
 	string getString1(){return string1;}
-	void setStringArr(string a,  string b,  string c)
+	/*void setStringArr(string a,  string b,  string c)
 	{
 		stringArr[0]=a;
 		stringArr[1]=b;
 		stringArr[2]=c;
 	}
-	string* getStringArr(){return stringArr;}
+	string* getStringArr(){return stringArr;}*/
 	void setFloat1(float x){float1=x;}
 	float getFloat1(){return float1;}
-	void setFloatArr(float a, float b, float c)
+	/*void setFloatArr(float a, float b, float c)
 	{
 		floatArr[0]=a;
 		floatArr[1]=b;
 		floatArr[2]=c;
 	}
-	float* getFloatArr(){return floatArr;}
+	float* getFloatArr(){return floatArr;}*/
 
 	string stringBuilder(char x[], int y)
 	{
