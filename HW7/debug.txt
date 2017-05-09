@@ -1,0 +1,15 @@
+int: 42
+intArr 23 : 45 : 67 : 
+char1: g
+charArr q : w : e : 
+ string1: Sun
+stringArr red : yellow : green : 
+float1: 12.3
+Process 2176 stopped
+* thread #1: tid = 0x2bf89, 0x0000000100001d77 a.out`BuildingB::stringBuilder(char*, int) + 55, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x7fff59d0b6f0)
+    frame #0: 0x0000000100001d77 a.out`BuildingB::stringBuilder(char*, int) + 55
+a.out`BuildingB::stringBuilder:
+->  0x100001d77 <+55>: movsbl (%r8,%rdx), %ecx
+    0x100001d7c <+60>: cmpl   $0x0, %ecx
+    0x100001d7f <+63>: movq   %rax, -0x108(%rbp)
+    0x100001d86 <+70>: movq   %rdi, -0x110(%rbp)

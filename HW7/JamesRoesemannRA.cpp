@@ -1,5 +1,5 @@
 //James Roesemann
-//Project1
+//Random Access Assignment Part 1
 
 
 #include <iostream>
@@ -48,19 +48,19 @@ class employee
 		int yearsEmployed(int num);//returns how many years its been since the entered record has been hired
 		int yearsEmployed(void);//returns how many years it's been since the current record has been entered
 
-
-		void charFNameBuilder(int pos, string input);
-		void charLNameBuilder(int pos, string input);
-		void charBuilder(int pos, string input, char x[][16], int pos2);
-		string fNameBuilder(int pos);
-		string lNameBuilder(int pos);
-		string stringBuilder(char x[][16], int pos, int pos2);
-		char getFName(int pos, int pos2);
-		char getLName(int pos, int pos2);
-		void setFName(int pos, int pos2, char x);
-		void setLName(int pos, int pos2, char x);
-		void pushFname(int pos, int pos2);
-		void pushLName(int col1, int col2);
+		//functions to modify this program for the random access assignment
+		void charFNameBuilder(int pos, string input); //converts the entered string into a character array for fName at the enterd poition
+		void charLNameBuilder(int pos, string input); //converts the entered string into a character array for lName at the enterd poition
+		void charBuilder(int pos, string input, char x[][16], int pos2); //recursive function that convetes the string input into char array x, pos being the position of the char array and pos2 being the position of the character value.
+		string fNameBuilder(int pos); //returns the value of the char array at the entered postion of the fName array in the from of a string.
+		string lNameBuilder(int pos); //returnes the value of the char array at the entered postion of the lName array in the from of a string.
+		string stringBuilder(char x[][16], int pos, int pos2);//returnes the value of char array x in the form of a string, pos being the lication of the array on x, and pos2 puing the location of the character value.
+		char getFName(int pos, int pos2); //returns the character value from fName at[pos][pos2]
+		char getLName(int pos, int pos2); //returns the character value from lName at[pos][pos2]
+		void setFName(int pos, int pos2, char x); //sets the character value at fName at[pos][pos2]
+		void setLName(int pos, int pos2, char x); //sets the character value at lName at[pos][pos2]
+		void pushFname(int pos, int pos2); //exchanges the character values of fName between pos and pos2
+		void pushLName(int col1, int col2); //exchanges the character values of lName between pos and pos2
 		
 	private:
 	
@@ -395,42 +395,41 @@ void employee::pushLName(int col1, int col2)
 
 int main()
 {
-	//not sure if you wanted main left blank or not but here is just something to demonstrate that the class works.
 	employee staff("Mackland", "Bert", 3.50, 8,5,2014);
-	staff.printAllRecords();
-	std::cout << "populating and printing all records\n";
+	//staff.printAllRecords();
+	//std::cout << "populating and printing all records\n";
 	staff.setRecord("Roesemann", "James", 17.76, 10, 16, 1988);
 	staff.setRecord("Reynolds", "Frank", 78.02, 12, 14, 1978);
 	staff.setRecord("Branagan", "Zap", 78.34, 3, 19, 2000);
 	staff.setRecord("Segar", "Bob", 12.78, 3, 17, 1963);
-	staff.printAllRecords();
-	std::cout<<"adding a new record\n";
+	//staff.printAllRecords();
+	//std::cout<<"adding a new record\n";
 	staff.setRecord("Gunderson", "Gus", 30.23, 7, 15,1996);
-	staff.printAllRecords();
-	std::cout << "completely changing an old record\n";
+	//staff.printAllRecords();
+	//std::cout << "completely changing an old record\n";
 	staff.setRecord("Kent", "Clark", 100.25, 12, 16, 1945, 3);
-	staff.printAllRecords();
-	std::cout <<"printing out a selected record\n";
-	staff.printRecord(2);
-	std::cout<<"printing out multiple records\n";
-	staff.printRecord(3, 0);
-	std::cout << "printing out a range of records \n";
-	staff.printRecordRange(1,4);
-	std::cout <<"changing the date of a selected record\n";
+	//staff.printAllRecords();
+	//std::cout <<"printing out a selected record\n";
+	//staff.printRecord(2);
+	//std::cout<<"printing out multiple records\n";
+	//staff.printRecord(3, 0);
+	//std::cout << "printing out a range of records \n";
+	//staff.printRecordRange(1,4);
+	//std::cout <<"changing the date of a selected record\n";
 	staff.setHireDate(3, 21, 2007, 1);
-	staff.printRecord(1);
-	std::cout << "changing the first and last name of a selected record\n";
+	//staff.printRecord(1);
+	//std::cout << "changing the first and last name of a selected record\n";
 	staff.setLastName("Baggens", 3);
 	staff.setFirstName("Bilbo", 3);
-	staff.printAllRecords();
-	std::cout<< "changing the salary of a selected record\n";
+	//staff.printAllRecords();
+	//std::cout<< "changing the salary of a selected record\n";
 	staff.setSalary(99.95, 2);
-	staff.printAllRecords();
-	std::cout <<"calculating how many years it's been since an employee has been hired.\n";
-	staff.printRecord(2);
-	std::cout << staff.yearsEmployed(2)<< endl;
-	staff.printRecord(1);
-	staff.yearsEmployed(1);
+	//staff.printAllRecords();
+	//std::cout <<"calculating how many years it's been since an employee has been hired.\n";
+	//staff.printRecord(2);
+	//std::cout << staff.yearsEmployed(2)<< endl;
+	//staff.printRecord(1);
+	//staff.yearsEmployed(1);
 
 	//HW7
 	ofstream outfile ("employes.dat", ios::out | ios::binary);

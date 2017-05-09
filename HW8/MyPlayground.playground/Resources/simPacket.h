@@ -1,6 +1,5 @@
 #ifndef SIMPACKET_H
 #define SIMPACKET_H
-#include <ctime>
 
 class simPacket{
 
@@ -10,9 +9,9 @@ private:
 	char dat[26];//made this 26 characthers in orderto add a null character. for now im just goingto allow ascii ranges from A-Z, change this later.
 
 public:
-	simPacket(std::string sIP, std::string dIP, std::string datValue){setSourceIp(sIP),setDestinationIp(dIP),setDat(datValue);}
-	simPacket(){};
-	//simPacket(std::string sIP, std::string dIP, std::string datValue){setSourceIp(sIP), setDestinationIp(sIP), setDat(datValue); srand(time(0));} //problem with this default constructor. somethingto do eith string. find out what.
+	//simPacket(){sourceIP=new char[25], destinationIp = new char(), dat=new char();}
+	simPacket(){srand(time(0));};
+	simPacket(std::string sIP, std::string dIP, std::string datValue){setSourceIp(sIP), setDestinationIp(sIP), setDat(datValue); srand(time(0));}
 	char* getSourceIp(){return sourceIp;} //returns sourceIp simPacket object
 	void setSourceIp(std::string x){charBuilder(x, sourceIp, 0);} // sets sourceIp simpacket object
 	char* getDestinationIp(){return destinationIp;} //returns destinationIp simPacket object
@@ -38,14 +37,12 @@ public:
 	//function to generate a random number for ip address
 	char ipGen(int pos)
 	{
-		//testinf
-
-		if(pos==0 || pos==4 || pos==8 || pos==12) return static_cast<char>(48+rand()%3);//generate number 0-2 and return
+		if(pos==0 || pos==4 || pos==8 || pos==12) return static_cast<char>(rand()%3);//generate number 0-2 and return
 		if(pos==3 || pos==7 || pos==11)return'.';
-		return (48+rand()%10);
+		return char(rand()%10);
 	}
 	//function to genetate random characters for data. just capital letter fr now. change htis.
-	char datGen(){return (65+rand()%26);}
+	char datGen(){return static_cast<char>(65+rand()%26);}
 /*	void charCopy(char input, char stored, int pos)
 	{
 		if(stored[pos]=='\0' || input[pos]=='\0') return;

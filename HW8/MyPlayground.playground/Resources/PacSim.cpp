@@ -17,24 +17,20 @@ using namespace std;
  if suspisious characters found. program will output a warning nad end.
  if not. values will be changed and pushed back into the queue.
  if this loops endlessly i will put in some condition where the correct suspicios characters are enterd.
- //he wants something visible to show that data has been read.
  */
 
 int main()
 {
-	simPacket pacMan("192.168.001.001", "432.902.112.145", "012345678901234567890123");
+	simPacket pacMan("192.168.001.001\0", "432.902.112.145\0", "0123456789012345678901234\0");
 	simPacket missPacMan;
 
-	srand(time(0));
-
-/*
+	//testing
 	std::cout << "Testing ip generator: ";
 	for(int i=0; i<25; i++)
 	{
-		std::cout <<  missPacMan.datGen();
+		//std::cout << std::string(1, pacMan.ipGen(i));
 	}
-	std::cout <<'0' <<std::endl;*/
-
+	std::cout << std::endl;
 
 	return 0;
 }
