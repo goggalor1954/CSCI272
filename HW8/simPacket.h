@@ -65,7 +65,8 @@ public:
 	void ipGen(char x[], int pos)
 	{
 		//if at the end of the array
-		if(x[pos]=='\0') return;
+		//if(x[pos]=='\0') return;
+		if(pos==15) return;
 		//assign characters and make sure that they are valid (excludeing zero). assign first. then test. if it fails re do it ateh current position
 		//0,4,8,12 are thr numbers to test. //test if even or odd maybe?
 		//x[pos]=ipCharGen(pos);
@@ -99,18 +100,23 @@ public:
 		if(validOctet(x, 0)==true && validOctet(x,4)==true && validOctet(x,8)==true && validOctet(x,12)==true) return true;
 		else return false;
 	}
+	bool validSource(){return validIp(sourceIp);}
+	bool validDestination(){return validIp(destinationIp);}
 	void fillData(char x[], int pos)//fills in fandom character data into the array dat.
 	{
-		if (x[pos]=='\0') return;
+		//if (x[pos]=='\0') return;
+		if (pos==25) return;
 		x[pos]=datCharGen();
 		fillData(x, pos+1);
 	}
 	void dataGen(){fillData(dat, 0);}//generates characters for the dat array.
-	/*bool checkData(char x[], int pos) //checs to see if data contains the encrypted data "JOHNJAY" (meaning its the ascii value -1. ) returns ture if found. false if not.
+	bool checkData(char x[], int pos) //checs to see if data contains the encrypted data "JOHNJAY" (meaning its the ascii value -1. ) returns ture if found. false if not.
 	{
-		if (x[pos]==21) return false;
-		if(x[pos]-1==)
-	}*/
+		if (pos==18) return false;
+		if (x[pos]-1=='J' && x[pos+1]-1=='O' && x[pos+2]-1=='H' && x[pos+3]-1=='N' && x[pos+4]-1=='J' && x[pos+5]-1=='A' && x[pos+6]-1=='Y') return true;
+		return checkData(x, pos+1);
+	}
+	bool checkData(){return checkData(dat, 0);}
 };
 
 

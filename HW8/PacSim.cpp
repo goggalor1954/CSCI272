@@ -19,23 +19,39 @@ using namespace std;
  if this loops endlessly i will put in some condition where the correct suspicios characters are enterd.
  //he wants something visible to show that data has been read.
  */
-
+//johnjay
 int main()
 {
 	srand(time(0));
-	simPacket pacMan("192.168.001.001", "432.902.112.145", "0123401234012340123401234\0");
+	simPacket pacMan("192.168.001.001", "432.902.112.145", "AppleBerryTruckHousePhone\0");
 	simPacket missPacMan;
+	simPacket ghost;
+	missPacMan.dataGen();
+	missPacMan.sourceIpGen();
+	missPacMan.destinationIpGen();
+	ghost.dataGen();
+	ghost.sourceIpGen();
+	ghost.destinationIpGen();
 
-	//srand(time(0));
+	std::queue<simPacket> cherry;
+	cherry.push(missPacMan);
+	cherry.push(pacMan);
+	cherry.push(ghost);
 
-	//testing
-	for(int i=0; i<5; i++){
-	pacMan.dataGen();
-	std::cout << pacMan.getPayload() << endl;//" "<< pacMan.validIp(pacMan.getSourceIp())<<endl;
-}
+	//std::cout << cherry.front().getSource() << endl;
+	/*while(cherry.front().checkData()!=true || cherry.front().validSource()!=true || cherry.front().validDestination()!=true)
+	{
+		cherry.front().dataGen();
+		cherry.front().sourceIpGen();
+		cherry.front().destinationIpGen();
+		cherry.push(cherry.front());
+		cherry.pop();
+		std::cout << cherry.front().checkData() << endl;
+	}*/
 
-	std::cout << pacMan.getPayload() << endl;//" " << pacMan.validIp(pacMan.getSourceIp())<<endl;
-	std::cout << 'd'-1 << endl;
+	//pacMan.setDat("AppleBerryKPIOKBZcarTruck");
 
 	return 0;
 }
+
+//al he basic elements work. just need to get the que loop to work.
