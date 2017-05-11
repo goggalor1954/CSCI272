@@ -22,19 +22,20 @@ using namespace std;
 
 int main()
 {
-	simPacket pacMan("192.168.001.001", "432.902.112.145", "012345678901234567890123");
+	srand(time(0));
+	simPacket pacMan("192.168.001.001", "432.902.112.145", "0123401234012340123401234\0");
 	simPacket missPacMan;
 
-	srand(time(0));
+	//srand(time(0));
 
-/*
-	std::cout << "Testing ip generator: ";
-	for(int i=0; i<25; i++)
-	{
-		std::cout <<  missPacMan.datGen();
-	}
-	std::cout <<'0' <<std::endl;*/
+	//testing
+	for(int i=0; i<5; i++){
+	pacMan.dataGen();
+	std::cout << pacMan.getPayload() << endl;//" "<< pacMan.validIp(pacMan.getSourceIp())<<endl;
+}
 
+	std::cout << pacMan.getPayload() << endl;//" " << pacMan.validIp(pacMan.getSourceIp())<<endl;
+	std::cout << 'd'-1 << endl;
 
 	return 0;
 }
