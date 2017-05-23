@@ -1,0 +1,12 @@
+class notes final day
+
+look into accessors
+
+next pointer node-put something inbetween them.
+
+exam list will not use sort. but its a good idea to pratice it anyway.
+
+queue and stach shift registers
+//shift 2 to the right divide by 2. changeing the sign etc.
+
+accesing a class through static binding and dynamic minding.
